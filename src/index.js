@@ -1,26 +1,36 @@
 import validator from './validator.js';
 
-console.log(validator);
- 
+const inputnome = document.getElementById("inputcodigoNome");
+const inputcodigo = document.getElementById("inputcodigoCartao");
+const nomecartao = document.getElementById("nomenocartao");
+const numerocartao = document.getElementById("numeronocartao");
 
-  
-  const button = document.getElementsById("submit");
+inputnome.addEventListener('keyup', () => {
+  nomecartao.innerHTML = inputnome.value;
+});
 
-  button.addEventListener("click", () => {
+inputcodigo.addEventListener('keyup', () => {
+  numerocartao.innerHTML = inputcodigo.value;
+});
 
-  const codigoCartao = document.getElementById("inputcodigoCartao").value;
-  const nomecomplet = document.getElementById("inputcodigoNome").value;
+document.getElementById("submit").addEventListener("click", () => {
 
-    
-  const codigoMascarado = validator.maskify(codigoCartao);
-  const valido = validator.isValid(codigoCartao);
+  const codigoMascarado = validator.maskify(inputcodigo.value);
+  const codigovalido = validator.isValid(inputcodigo.value);
 
-  if (valido) {
-    alert(`Obaa! ${nomecomplet}, sua compra no cartão ${codigoMascarado} foi aprovada com sucesso.`);
-  } else {
-    alert(`Olá, ${nomecomplet}! O número de cartão ${codigoMascarado} é inválido. Verifique os dados adicionados e tente novamente.`);
+  const numerovazio = inputcodigo.value;
+  const nomevazio = inputnome.value;
+
+  if (numerovazio === "" || nomevazio === "") {
+    alert("Por favor, preencha todos os campos obrigatórios para verificar o status do seu cartão de crédito.");
+    return false;
   }
 
+  if (codigovalido) {
+    alert(`Obaa! Identificamos que o seu cartão ${codigoMascarado} é válido, portanto, poderá realizar compras com a agência eTrip World 😎😎.`);
+  } else {
+    alert(`O número do cartão ${codigoMascarado} é inválido. Verifique os dados adicionados e tente novamente.`);
+  }
 
 });
 
@@ -33,18 +43,36 @@ console.log(validator);
 
 
 
-/*const codigoCartaoInput = document.getElementById("inputcodigoCartao");
-const validarButton = document.getElementById("submit");
 
-validarButton.addEventListener("click", function() {
-  
-  const codigoCartao = codigoCartaoInput.value;
 
-  if (validator.isValid(codigoCartao)) {
-    alert("O número do cartão é válido!");
-  } else {
-    alert("O número do cartão é inválido!");
-  }
+
+
+
+
+/*if (numeroCartaoLimpo.length < 16 || numeroCartaoLimpo.length > 16) {
+      return false;*/
+
+
+/*console.log(`Nome Completo: ${inputnome}`);
+console.log(`Código do Cartão: ${codigoCartao}`);
+console.log(`Código de Cartão (Mascarado): ${codigoMascarado}`);
+console.log(`Cartão Válido: ${valido}`);*/
+
+
+/*const nometarjeta = document.querySelector('#tarjeta .nome')
+
+  formulario.inputcodigoNome.addEventListener('keyup', (e) => {
+    let valorinput = e.target.value;
+
+    formulario.inputcodigoNome.value = valorinput
+
+    nometarjeta.textContent = valorinput
+    if(valorinput == '') {
+
+      nometarjeta.textContent = '********** ***** ';
+
+    }
+
 });*/
 
 
@@ -62,41 +90,24 @@ validarButton.addEventListener("click", function() {
 
 
 
+/*const tarjeta = document.querySelector('#tarjeta');
 
-
-  /*document.getElementById("submit").addEventListener("click", () => {
-
-  });
-
-  const codigoCartao = document.getElementById("inputcodigoCartao").value;
-  const nomecompleto = document.getElementById("inputcodigoNome").value
-  const codigoMascarado = validator.maskify(codigoCartao);
-  const codigovalido = validator.isValid(codigoCartao);
-
-  if (codigovalido) {
-  alert(`Obaa! ${nomecompleto}, sua compra no cartão ${codigoMascarado} foi aprovada com sucesso.`);
-  } else {
-  alert(`Olá, ${nomecompleto}! O número de cartão ${codigoMascarado} é inválido. Verifique os dados adicionados e tente novamente.`);
-  
-  }
-
-    
-  console.log(`Nome Completo: ${nomecomplet}`);
-  console.log(`Código do Cartão: ${codigoCartao}`);
-  console.log(`Código de Cartão (Mascarado): ${codigoMascarado}`);
-  console.log(`Cartão Válido: ${codigovalido}`);
-
-  console.log(validator);*/
-  
-/*document.getElementById("submit").addEventListener("click", () => {
-  let codigocartao = document.getElementById("inputCardNumber").value;
-  printValidationStatus(validator.isValid(codigoCartao));
-
+tarjeta.addEventListener('click', () => {
+  tarjeta.classList.toggle('active');
 });
 
-function printValidationStatus(cardNumberIsValid) {
-  cardNumberIsValid ? document.getElementById("cardNumberValidationStatus").innerHTML = `Obaa! ${nomecompleto}, sua compra no cartão ${codigoMascarado} foi aprovada com sucesso.`:
-   document.getElementById("cardNumberValidationStatus").innerHTML = `Olá, ${nomecompleto}! O número de cartão ${codigoMascarado} é inválido. Verifique os dados adicionados e tente novamente.`;
-}*/
+
+inputcodigoCartao.addEventListener('keyup', (e) => {
+    let valorinput = e.target.value;
+
+    inputcodigoCartao.value = valorinput
+
+});*/
 
 
+
+/*function digitnome() {
+  const nomeformulario = document.getElementById("inputcodigoNome")
+  const descricaonome = document.getElementById("nomecartao").value;
+  nomecartao.innerHTML = `${inputcodigoNome}`;
+  }*/
