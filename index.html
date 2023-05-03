@@ -1,105 +1,57 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>PlanetaTurismo.com</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="validator.js" />
-    <link rel="stylesheet" href="index.js" />
-
-  </head>
+<head>
+  <meta charset="utf-8">
+  <title>eTrip World</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 <body>
-
-  <script type="text/javascript" src="index.js"> </script>
-
-    <center><header>FORMA DE PAGAMENTO</header></center>
-    
-    <br>
-
-    <div class="h1-container"><center><strong><h1>PLANETA TURISMO</h1></strong></div></center>
-
-    </br>
-
-    <div class="imagem">
-
-    <div class="container">
-
-    <center><h2>Para finalizar sua compra, precisamos que confirme os dados abaixo:</h2></center>
-
-<form>
-
-<ul>
-  <br>
-
-  <label for="inputcodigoNome">Insira seu nome completo:</label>
-
-  <input type="text" id="inputcodigoNome" name="inputcodigoNome" placeholder= "nome completo" required>
-
-  <label for="inputcodigoCartao">Insira o número do cartão:</label>
-
-  <input type="text" id="inputcodigoCartao" name="inputcodigoCartao" placeholder= "cartão de crédito" required>
-
-</br>
-  <br>
-
-     <button id="submit" onclick=validarCartao()>Confirmar</button></div>
-
-</br>
-</ul>
-
-</form>
-
+  <center>
+    <h2 class="logo" id="logo">eTrip W<img
+        src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Globo_terraqueo_3.gif" style="width: 2.5%;">rld</h2>
+  </center>
+  <center>
+    <h2 class="slogan" id="slogan">Verifique se o seu cartão de crédito é válido para comprar pacotes de viagens com a
+      gente!</h2>
+  </center>
+  <div class="container">
+    <section class="imgcartao" id="imgcartao">
+      <div class="configimg">
+        <div class="logo-marca">
+          <img src="https://logodownload.org/wp-content/uploads/2014/07/mastercard-logo.png">
+        </div>
+        <img src="https://img.icons8.com/plasticine/512/sim-card-chip.png" class="chip">
+        <div class="dados">
+          <div class="numeronocartao">
+            <p class="label"></p>
+            <p class="numerocartao" id="numeronocartao">0000 0000 0000 0000</p>
+          </div>
+          <div class="nomenocartao">
+            <p class="label"></p>
+            <p class="nomenocartao" id="nomenocartao">***** ***** *****</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <form id="tarja" class="tarja">
+      <ul>
+        <div class="numerodocartao">
+          <br>
+          <label for="inputcodigoCartao">Insira o número do cartão:</label>
+          <input type="text" id="inputcodigoCartao" maxlength="19" placeholder="0000 0000 0000 0000" required>
+        </div>
+        <div class="nomedocartao">
+          <br>
+          <label for="inputcodigoNome">Insira seu nome completo:</label>
+          <input type="text" id="inputcodigoNome" placeholder="NOME COMPLETO" required>
+        </div>
+        <br>
+        <div class="botao">
+          <center><button type="button" id="submit">Confirmar</button></center>
+        </div>
+      </ul>
+    </form>
+  </div>
+  <script src="index.js" type="module"></script>
 </body>
-
 </html>
-
-<script>
-
-function maskify(codigoCartao) {
-
-const caracteresEscondidos = 12;
-const caracteresVisiveis = codigoCartao.length - caracteresEscondidos;
-const caracteresEscondidosStr = "#".repeat(caracteresEscondidos);
-const caracteresVisiveisStr = codigoCartao.slice(-caracteresVisiveis);
-return caracteresEscondidosStr + caracteresVisiveisStr;
-}
-
-function isValid(codigoCartao) {
-
-const numeroCartaoLimpo = codigoCartao.replace(/\D/g, "");
-if (numeroCartaoLimpo.length < 16 || numeroCartaoLimpo.length > 16) {
-  return false;
-}
-const somaDigitos = numeroCartaoLimpo.split("").reverse().reduce((acc, digit, idx) => {
-const valor = parseInt(digit, 10);
-if (idx % 2 === 0) {
- acc += valor;
-} else {
-const resultadoMultiplicacao = valor * 2;
- acc += resultadoMultiplicacao > 9 ? resultadoMultiplicacao.toString().split("").reduce((sum, d) => sum + parseInt(d), 0) : resultadoMultiplicacao;
-}
-return acc;
-}, 0);
-
-return somaDigitos % 10 === 0;
-}
-
-function validarCartao() {
-const codigoCartao = document.getElementById("inputcodigoCartao").value;
-const nomecomplet = document.getElementById("inputcodigoNome").value
-const codigoMascarado = maskify(codigoCartao);
-const valido = isValid(codigoCartao);
-
-if (valido) {
-  alert(`Obaa! ${nomecomplet} sua compra no cartão ${codigoMascarado} foi aprovada com sucesso.`);
-} else {
-  alert(`Olá, ${nomecomplet}! O número de cartão ${codigoMascarado} é inválido. Verifique os dados adicionados e tente novamente.`);
-}
-}
-
-  console.log(`Nome Completo: ${nomecomplet}`);
-  console.log(`Código do Cartão: ${codigoCartao}`);
-  console.log(`Código de Cartão (Mascarado): ${codigoMascarado}`);
-  console.log(`Cartão Válido: ${valido}`);
-
-</script>

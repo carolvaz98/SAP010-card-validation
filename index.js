@@ -1,45 +1,114 @@
 import validator from './validator.js';
 
-console.log(validator);
+const inputnome = document.getElementById("inputcodigoNome");
+const inputcodigo = document.getElementById("inputcodigoCartao");
+const nomecartao = document.getElementById("nomenocartao");
+const numerocartao = document.getElementById("numeronocartao");
 
+inputnome.addEventListener('keyup', () => {
+  nomecartao.innerHTML = inputnome.value;
+});
 
-function maskify(codigoCartao) {
+inputcodigo.addEventListener('keyup', () => {
+  numerocartao.innerHTML = inputcodigo.value;
 
-  const caracteresEscondidos = 12;
-  const caracteresVisiveis = codigoCartao.length - caracteresEscondidos;
-  const caracteresEscondidosStr = "🐱".repeat(caracteresEscondidos);
-  const caracteresVisiveisStr = codigoCartao.slice(-caracteresVisiveis);
-  return caracteresEscondidosStr + caracteresVisiveisStr;
-}
+});
 
-function isValid(codigoCartao) {
+document.getElementById("submit").addEventListener("click", () => {
 
-  const numeroCartaoLimpo = codigoCartao.replace(/\D/g, "");
-  if (numeroCartaoLimpo.length < 16 || numeroCartaoLimpo.length > 16) {
+  const codigoMascarado = validator.maskify(inputcodigo.value);
+  const codigovalido = validator.isValid(inputcodigo.value);
+
+  const numerovazio = inputcodigo.value;
+  const nomevazio = inputnome.value;
+
+  if (numerovazio === "" || nomevazio === "") {
+    alert("Por favor, preencha todos os campos obrigatórios para verificar o status do seu cartão de crédito.");
     return false;
-}
-const somaDigitos = numeroCartaoLimpo.split("").reverse().reduce((acc, digit, idx) => {
-  const valor = parseInt(digit, 10);
- if (idx % 2 === 0) {
-   acc += valor;
-} else {
-  const resultadoMultiplicacao = valor * 2;
-   acc += resultadoMultiplicacao > 9 ? resultadoMultiplicacao.toString().split("").reduce((sum, d) => sum + parseInt(d), 0) : resultadoMultiplicacao;
-}
- return acc;
- }, 0);
-
- return somaDigitos % 10 === 0;
-}
-
-function validarCartao() {
-  const codigoCartao = document.getElementById("inputcodigoCartao").value;
-  const codigoMascarado = maskify(codigoCartao);
-  const valido = isValid(codigoCartao);
-
-  if (valido) {
-    alert(`O número de cartão ${codigoMascarado} é válido.`);
-  } else {
-    alert(`O número de cartão ${codigoMascarado} é inválido.`);
   }
-}
+
+  if (codigovalido) {
+    alert(`Obaa! Identificamos que o seu cartão ${codigoMascarado} é válido, portanto, poderá realizar compras com a agência eTrip World 😎😎.`);
+  } else {
+    alert(`O número do cartão ${codigoMascarado} é inválido. Verifique os dados adicionados e tente novamente.`);
+  }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*if (numeroCartaoLimpo.length < 16 || numeroCartaoLimpo.length > 16) {
+      return false;*/
+
+
+/*console.log(`Nome Completo: ${inputnome}`);
+console.log(`Código do Cartão: ${codigoCartao}`);
+console.log(`Código de Cartão (Mascarado): ${codigoMascarado}`);
+console.log(`Cartão Válido: ${valido}`);*/
+
+
+/*const nometarjeta = document.querySelector('#tarjeta .nome')
+
+  formulario.inputcodigoNome.addEventListener('keyup', (e) => {
+    let valorinput = e.target.value;
+
+    formulario.inputcodigoNome.value = valorinput
+
+    nometarjeta.textContent = valorinput
+    if(valorinput == '') {
+
+      nometarjeta.textContent = '********** ***** ';
+
+    }
+
+});*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*const tarjeta = document.querySelector('#tarjeta');
+
+tarjeta.addEventListener('click', () => {
+  tarjeta.classList.toggle('active');
+});
+
+
+inputcodigoCartao.addEventListener('keyup', (e) => {
+    let valorinput = e.target.value;
+
+    inputcodigoCartao.value = valorinput
+
+});*/
+
+
+
+/*function digitnome() {
+  const nomeformulario = document.getElementById("inputcodigoNome")
+  const descricaonome = document.getElementById("nomecartao").value;
+  nomecartao.innerHTML = `${inputcodigoNome}`;
+  }*/
