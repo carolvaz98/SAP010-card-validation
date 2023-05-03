@@ -11,6 +11,7 @@ inputnome.addEventListener('keyup', () => {
 
 inputcodigo.addEventListener('keyup', () => {
   numerocartao.innerHTML = inputcodigo.value;
+
 });
 
 document.getElementById("submit").addEventListener("click", () => {
